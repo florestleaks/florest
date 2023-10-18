@@ -1,0 +1,37 @@
+version: "3.9"
+
+services:
+
+  devcontainer:
+    build:
+      context: .
+      target: dev
+    environment:
+      - POETRY_PYPI_TOKEN_PYPI
+    volumes:
+      - ..:/workspaces
+      - command-history-volume:/home/user/.history/
+
+  dev:
+    extends: devcontainer
+    stdin_open: true
+    tty: true
+    entrypoint: []
+    command:
+      [
+        "sh",
+        "-c",
+        "sudo chown user $$SSH_AUTH_SOCK && cp --update /opt/build/poetry/poetry.lock /workspaces/florest/ && mkdir -p /workspaces/florest/.git/hooks/ && cp --update /opt/build/git/* /workspaces/florest/.git/hooks/ && zsh"
+      ]
+    environment:
+      - POETRY_PYPI_TOKEN_PYPI
+      - SSH_AUTH_SOCK=/run/host-services/ssh-auth.sock
+    volumes:
+      - ~/.gitconfig:/etc/gitconfig
+      - ~/.ssh/known_hosts:/home/user/.ssh/known_hosts
+      - ${SSH_AGENT_AUTH_SOCK:-/run/host-services/ssh-auth.sock}:/run/host-services/ssh-auth.sock
+    profiles:
+      - dev
+
+volumes:
+  command-history-volume:
