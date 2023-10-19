@@ -26,9 +26,18 @@ ruff = "^0.1.0"
 jsonschema = "^4.19.1"
 requests = "^2.31.0"
 pre-commit = "^3.5.0"
-black = {extras = ["d"], version = "^23.10.0"}
+black = { extras = ["jupyter"], version = ">=23.3.0" }
 commitizen = "^3.12.0"
+poethepoet = "^0.24.1"
+pytest = "^7.4.2"
+typeguard = "^4.1.5"
+coverage = { extras = ["toml"], version = ">=7.3.2" }
+mongomock = "^4.1.2"
+safety = "^2.3.5"
 
+[tool.poetry.group.dev.dependencies]  # https://python-poetry.org/docs/master/managing-dependencies/
+jupyterlab = ">=3.6.3"
+pdoc = ">=13.1.1"
 
 [tool.black]  # https://black.readthedocs.io/en/stable/usage_and_configuration/the_basics.html#configuration-via-a-file
 line-length = 100
@@ -112,8 +121,7 @@ convention = "numpy"
   [tool.poe.tasks.lab]
   help = "Run Jupyter Lab"
 
-    [[tool.poe.tasks.lab.sequence]]
-    cmd = "mkdir -p notebooks"
+
 
     [[tool.poe.tasks.lab.sequence]]
     cmd = """

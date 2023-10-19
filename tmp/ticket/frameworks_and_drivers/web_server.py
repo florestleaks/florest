@@ -1,8 +1,8 @@
 # web_server.py
 from flask import Flask, jsonify, request
 
-from florest.user.drivers.database.nosql.mongodb_driver import MongodbUserRepository
-from florest.user.entities import User
+from florest import MongodbUserRepository
+from florest.user.entities.user import User
 from florest.user.factory.database.nosql.factory_user_mongo import UserFactoryMongodbRepository
 from florest.user.interface_adapters.user.user_presenter import UserPresenter
 
