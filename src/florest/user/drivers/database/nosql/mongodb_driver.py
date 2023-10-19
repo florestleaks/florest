@@ -201,6 +201,7 @@ class MongodbUserRepository(UserRepository):
 
     def bulk_user_delete(self, emails: list[str]) -> None:
         """
+
         Delete multiple users based on their emails.
 
         Parameters
